@@ -16,3 +16,8 @@ management:
       exposure:
         include: "*"
 
+logging:
+  path: logs
+  level:
+    ROOT: info
+    com.goku: debug
