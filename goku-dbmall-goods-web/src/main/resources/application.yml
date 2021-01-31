@@ -1,13 +1,15 @@
 server:
   port: 25000
 spring:
+  profiles:
+    active: sony
   application:
     name: goku-dbmall-goods
   cloud:
     nacos:
       discovery:
         register-enabled: true
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.50.167:8848
         weight: 1
         namespace: dev
 management:

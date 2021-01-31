@@ -4,7 +4,7 @@ import com.goku.foundation.util.BasePO;
 import lombok.Data;
 
 @Data
-public class categoryInfo extends BasePO {
+public class CategoryInfo extends BasePO {
 
     private String gkcode;
 
