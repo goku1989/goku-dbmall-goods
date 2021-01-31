@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.goku.dbmall.goods.common.utils.Constants.*;
+import static com.goku.dbmall.goods.common.utils.CustomConstants.*;
 
 @Slf4j
 @Service
@@ -25,16 +25,20 @@ public class CategoryInfoServiceImpl implements CategoryInfoService {
 
     @Override
     public List<CategoryInfoDTO> getCategories() {
-        List<CategoryInfo> categoryInfos = categoryInfoMapper.selectAll();
+        List<CategoryInfo> categoryInfos = categoryInfoMapper.selectByExample(Example.builder(CategoryInfo.class)
+                .where(WeekendSqls.<CategoryInfo>custom()
+                        .andEqualTo(CategoryInfo::getDeleted, NOT_DELETE))
+                .orderBy(SORT_INDEX)
+                .build());
         return CommonUtil.convertList(categoryInfos, CategoryInfoDTO.class);
     }
 
     @Override
     public Boolean insertCategory(CategoryInfoDTO categoryInfoDTO) {
         CategoryInfo categoryInfo = CommonUtil.convert(categoryInfoDTO, CategoryInfo.class);
-        categoryInfo.setName(categoryInfo.getName().replace(" ", ""));
+        categoryInfo.setName(categoryInfo.getName().trim());
         POUtils.initCreatPO(categoryInfo);
-        categoryInfo.setGkcode("gk-category-" + CommonUtil.getSimpleId());
+        categoryInfo.setGkcode(GK_CATEGORY + CommonUtil.getIdByUUId());
         if (null == categoryInfo.getSortIndex()) {
             List<CategoryInfo> categoryInfos = categoryInfoMapper.selectByExample(Example.builder(CategoryInfo.class)
                     .where(WeekendSqls.<CategoryInfo>custom()

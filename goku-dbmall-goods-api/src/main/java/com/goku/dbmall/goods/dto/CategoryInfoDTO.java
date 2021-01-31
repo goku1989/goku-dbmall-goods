@@ -3,6 +3,8 @@ package com.goku.dbmall.goods.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CategoryInfoDTO {
@@ -25,4 +27,6 @@ public class CategoryInfoDTO {
     private String bgColor;
 
     private Integer sortIndex;
+
+    List<CategoryInfoDTO> children;
 }
