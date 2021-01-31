@@ -12,6 +12,7 @@
     <result column="slogan" jdbcType="VARCHAR" property="slogan" />
     <result column="cat_image" jdbcType="VARCHAR" property="catImage" />
     <result column="bg_color" jdbcType="VARCHAR" property="bgColor" />
+    <result column="sort_index" jdbcType="INTEGER" property="sortIndex" />
     <result column="deleted" jdbcType="TINYINT" property="deleted" />
     <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
     <result column="created_user" jdbcType="VARCHAR" property="createdUser" />
@@ -20,7 +21,7 @@
     <result column="ts" jdbcType="BIGINT" property="ts" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, gkcode, name, code, type, parent_gkcode, logo, slogan, cat_image, bg_color, deleted, 
-    created_date, created_user, modified_date, modified_user, ts
+    id, gkcode, name, code, type, parent_gkcode, logo, slogan, cat_image, bg_color, sort_index,
+    deleted, created_date, created_user, modified_date, modified_user, ts
   </sql>
 </mapper>

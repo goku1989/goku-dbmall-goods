@@ -24,5 +24,5 @@ public class CategoryInfo extends BasePO {
 
     private String bgColor;
 
-
+    private Integer sortIndex;
 }

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CategoryInfoService {
     List<CategoryInfoDTO> getCategories();
+
+    Boolean insertCategory(CategoryInfoDTO categoryInfoDTO);
 }

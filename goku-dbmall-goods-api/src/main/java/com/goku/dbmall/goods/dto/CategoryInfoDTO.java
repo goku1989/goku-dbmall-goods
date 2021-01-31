@@ -23,4 +23,6 @@ public class CategoryInfoDTO {
     private String catImage;
 
     private String bgColor;
+
+    private Integer sortIndex;
 }
