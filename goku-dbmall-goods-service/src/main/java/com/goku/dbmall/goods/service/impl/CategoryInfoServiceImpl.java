@@ -4,8 +4,9 @@ import com.goku.dbmall.goods.dao.mapper.CategoryInfoMapper;
 import com.goku.dbmall.goods.dao.po.CategoryInfo;
 import com.goku.dbmall.goods.dto.CategoryInfoDTO;
 import com.goku.dbmall.goods.service.CategoryInfoService;
-import com.goku.foundation.util.CommonUtil;
-import com.goku.foundation.util.POUtils;
+import com.goku.foundation.utils.CommonUtil;
+import com.goku.foundation.utils.POUtils;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -14,8 +15,10 @@ import tk.mybatis.mapper.weekend.WeekendSqls;
 import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.goku.dbmall.goods.common.utils.CustomConstants.*;
+import static com.goku.dbmall.goods.common.constant.CustomConstants.*;
+import static com.goku.foundation.constant.NumberConstant.*;
 
 @Slf4j
 @Service
@@ -30,7 +33,8 @@ public class CategoryInfoServiceImpl implements CategoryInfoService {
                         .andEqualTo(CategoryInfo::getDeleted, NOT_DELETE))
                 .orderBy(SORT_INDEX)
                 .build());
-        return CommonUtil.convertList(categoryInfos, CategoryInfoDTO.class);
+        List<CategoryInfoDTO> categoryInfoDTOS = CommonUtil.convertList(categoryInfos, CategoryInfoDTO.class);
+        return list2Tree(categoryInfoDTOS);
     }
 
     @Override
@@ -50,5 +54,20 @@ public class CategoryInfoServiceImpl implements CategoryInfoService {
         }
         categoryInfoMapper.insert(categoryInfo);
         return true;
+    }
+
+    private List<CategoryInfoDTO> list2Tree(List<CategoryInfoDTO> categoryInfoDTOS) {
+        return categoryInfoDTOS.stream().filter(e -> STRING_MINUS_ONE.equals(e.getParentGkcode()))
+                .map(i -> findChildren(i, categoryInfoDTOS)).collect(Collectors.toList());
+    }
+
+    private CategoryInfoDTO findChildren(CategoryInfoDTO node, List<CategoryInfoDTO> allList) {
+        if (node.getChildren() == null) {
+            node.setChildren(Lists.newArrayList());
+        }
+        allList.stream()
+                .filter(i -> node.getGkcode().equals(i.getParentGkcode()))
+                .forEach(i -> node.getChildren().add(findChildren(i, allList)));
+        return node;
     }
 }

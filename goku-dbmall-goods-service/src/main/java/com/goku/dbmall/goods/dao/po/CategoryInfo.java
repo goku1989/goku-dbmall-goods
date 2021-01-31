@@ -1,6 +1,6 @@
 package com.goku.dbmall.goods.dao.po;
 
-import com.goku.foundation.util.BasePO;
+import com.goku.foundation.utils.BasePO;
 import lombok.Data;
 
 @Data

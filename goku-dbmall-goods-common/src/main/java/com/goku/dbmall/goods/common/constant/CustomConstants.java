@@ -1,4 +1,4 @@
-package com.goku.dbmall.goods.common.utils;
+package com.goku.dbmall.goods.common.constant;
 
 public class CustomConstants {
     public static final String SORT_INDEX = "sortIndex";
