@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-<!--    <classPathEntry location="/Users/goku/Documents/apache-maven-3.5.4/repo/mysql/mysql-connector-java/8.0.19" />-->
+    <classPathEntry location="/Users/goku/Documents/apache-maven-3.5.4/repo/mysql/mysql-connector-java/8.0.19/mysql-connector-java-8.0.19.jar" />
 
     <context id="MysqlTables" targetRuntime="MyBatis3">
         <commentGenerator>
@@ -11,7 +11,7 @@
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.50.167:3306/dbmall-goods?useSSL=false"
+                        connectionURL="jdbc:mysql://192.168.50.167:3306/dbmall-goods?serverTimezone=UTC"
                         userId="mysql_sony"
                         password="root">
         </jdbcConnection>
@@ -36,7 +36,7 @@
 
         <!-- mapper.xml生成文件路径  -->
 
-        <sqlMapGenerator targetPackage="com/goku/dbmall/goods/dao/po"
+        <sqlMapGenerator targetPackage="com.goku.dbmall.goods.dao.mapper"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true" />
 
@@ -55,7 +55,7 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <!-- 否认为驼峰命名 -->
-            <property name="useActualColumnNames" value="true" />
+            <property name="useActualColumnNames" value="false" />
         </table>
     </context>
 

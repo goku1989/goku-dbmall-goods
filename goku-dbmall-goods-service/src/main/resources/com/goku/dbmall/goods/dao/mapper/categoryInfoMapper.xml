@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goku.dbmall.goods.dao.mapper.categoryInfoMapper">
+  <resultMap id="BaseResultMap" type="com.goku.dbmall.goods.dao.po.categoryInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gkcode" jdbcType="VARCHAR" property="gkcode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="parent_gkcode" jdbcType="VARCHAR" property="parentGkcode" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="slogan" jdbcType="VARCHAR" property="slogan" />
+    <result column="cat_image" jdbcType="VARCHAR" property="catImage" />
+    <result column="bg_color" jdbcType="VARCHAR" property="bgColor" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="created_user" jdbcType="VARCHAR" property="createdUser" />
+    <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
+    <result column="modified_user" jdbcType="VARCHAR" property="modifiedUser" />
+    <result column="ts" jdbcType="BIGINT" property="ts" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gkcode, name, code, type, parent_gkcode, logo, slogan, cat_image, bg_color, deleted, 
+    created_date, created_user, modified_date, modified_user, ts
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from category_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from category_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.goku.dbmall.goods.dao.po.categoryInfo">
+    insert into category_info (id, gkcode, name, 
+      code, type, parent_gkcode, 
+      logo, slogan, cat_image, 
+      bg_color, deleted, created_date, 
+      created_user, modified_date, modified_user, 
+      ts)
+    values (#{id,jdbcType=BIGINT}, #{gkcode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{parentGkcode,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{slogan,jdbcType=VARCHAR}, #{catImage,jdbcType=VARCHAR}, 
+      #{bgColor,jdbcType=VARCHAR}, #{deleted,jdbcType=TINYINT}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{createdUser,jdbcType=VARCHAR}, #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUser,jdbcType=VARCHAR}, 
+      #{ts,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goku.dbmall.goods.dao.po.categoryInfo">
+    insert into category_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gkcode != null">
+        gkcode,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="parentGkcode != null">
+        parent_gkcode,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="slogan != null">
+        slogan,
+      </if>
+      <if test="catImage != null">
+        cat_image,
+      </if>
+      <if test="bgColor != null">
+        bg_color,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="createdUser != null">
+        created_user,
+      </if>
+      <if test="modifiedDate != null">
+        modified_date,
+      </if>
+      <if test="modifiedUser != null">
+        modified_user,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gkcode != null">
+        #{gkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="parentGkcode != null">
+        #{parentGkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null">
+        #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="catImage != null">
+        #{catImage,jdbcType=VARCHAR},
+      </if>
+      <if test="bgColor != null">
+        #{bgColor,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdUser != null">
+        #{createdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedDate != null">
+        #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUser != null">
+        #{modifiedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goku.dbmall.goods.dao.po.categoryInfo">
+    update category_info
+    <set>
+      <if test="gkcode != null">
+        gkcode = #{gkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="parentGkcode != null">
+        parent_gkcode = #{parentGkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null">
+        slogan = #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="catImage != null">
+        cat_image = #{catImage,jdbcType=VARCHAR},
+      </if>
+      <if test="bgColor != null">
+        bg_color = #{bgColor,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdUser != null">
+        created_user = #{createdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedDate != null">
+        modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUser != null">
+        modified_user = #{modifiedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goku.dbmall.goods.dao.po.categoryInfo">
+    update category_info
+    set gkcode = #{gkcode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      parent_gkcode = #{parentGkcode,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      slogan = #{slogan,jdbcType=VARCHAR},
+      cat_image = #{catImage,jdbcType=VARCHAR},
+      bg_color = #{bgColor,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=TINYINT},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      created_user = #{createdUser,jdbcType=VARCHAR},
+      modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
+      modified_user = #{modifiedUser,jdbcType=VARCHAR},
+      ts = #{ts,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
