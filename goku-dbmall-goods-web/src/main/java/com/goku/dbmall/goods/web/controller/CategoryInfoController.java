@@ -16,6 +16,7 @@ public class CategoryInfoController {
     @Resource
     private CategoryInfoService categoryInfoService;
 
+    @CrossOrigin
     @GetMapping(value = "getCategories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public BaseResponse<List<CategoryInfoDTO>> getCategories() {
         return new BaseResponse<>(categoryInfoService.getCategories());

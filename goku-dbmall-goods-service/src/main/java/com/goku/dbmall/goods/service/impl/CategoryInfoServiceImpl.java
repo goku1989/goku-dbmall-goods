@@ -8,6 +8,7 @@ import com.goku.foundation.utils.CommonUtil;
 import com.goku.foundation.utils.POUtils;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.weekend.WeekendSqls;
@@ -49,8 +50,13 @@ public class CategoryInfoServiceImpl implements CategoryInfoService {
                             .andEqualTo(CategoryInfo::getDeleted, NOT_DELETE)
                             .andEqualTo(CategoryInfo::getParentGkcode, categoryInfo.getParentGkcode()))
                     .build());
-            CategoryInfo info = categoryInfos.stream().max(Comparator.comparing(CategoryInfo::getSortIndex)).get();
-            categoryInfo.setSortIndex(info.getSortIndex() + 1);
+            if (CollectionUtils.isEmpty(categoryInfos)) {
+                categoryInfo.setSortIndex(0);
+            } else {
+                CategoryInfo info = categoryInfos.stream().max(Comparator.comparing(CategoryInfo::getSortIndex)).get();
+                categoryInfo.setSortIndex(info.getSortIndex() + 1);
+            }
+
         }
         categoryInfoMapper.insert(categoryInfo);
         return true;
