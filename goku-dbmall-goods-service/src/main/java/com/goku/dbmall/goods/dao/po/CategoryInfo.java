@@ -3,7 +3,10 @@ package com.goku.dbmall.goods.dao.po;
 import com.goku.foundation.utils.BasePO;
 import lombok.Data;
 
+import javax.persistence.Table;
+
 @Data
+@Table(name="category_info")
 public class CategoryInfo extends BasePO {
 
     private String gkcode;
