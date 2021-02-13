@@ -74,6 +74,7 @@ tags
 *.log
 .logs
 *.yml
+*.gz
 generatorConfig.xml
 
 ## maven release plugin
