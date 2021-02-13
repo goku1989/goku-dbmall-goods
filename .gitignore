@@ -73,6 +73,7 @@ tags
 *.log
 .logs
 *.yml
+generatorConfig.xml
 
 ## maven release plugin
 pom.xml.releaseBackup
