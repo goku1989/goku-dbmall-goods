@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/goodsInfo")
 public class GoodsInfoController {
