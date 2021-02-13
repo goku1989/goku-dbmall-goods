@@ -1,13 +1,11 @@
-package com.goku.dbmall.goods.dao.po;
+package com.goku.dbmall.goods.dto;
 
-import com.goku.foundation.utils.BasePO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
-import javax.persistence.Table;
-
 @Data
-@Table(name="goods_info")
-public class GoodsInfo extends BasePO {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class GoodsInfoDTO {
     private String gkcode;
 
     private String goodsCode;
@@ -21,5 +19,4 @@ public class GoodsInfo extends BasePO {
     private Byte onOffStatus;
 
     private String content;
-
 }
