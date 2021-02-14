@@ -9,6 +9,7 @@ import com.goku.foundation.utils.POUtils;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.weekend.WeekendSqls;
@@ -42,11 +43,27 @@ public class CategoryInfoServiceImpl implements CategoryInfoService {
     @Override
     public Boolean insertCategory(CategoryInfoDTO categoryInfoDTO) {
         CategoryInfo categoryInfo = CommonUtil.convert(categoryInfoDTO, CategoryInfo.class);
-        categoryInfo.setName(categoryInfo.getName().trim());
+        String name = categoryInfo.getName().trim();
+        categoryInfo.setName(name);
+
+        List<CategoryInfo> names = categoryInfoMapper.selectByExample(Example.builder(CategoryInfo.class)
+                .where(WeekendSqls.<CategoryInfo>custom()
+                        .andEqualTo(CategoryInfo::getDeleted, NOT_DELETE)
+                        .andEqualTo(CategoryInfo::getName, name))
+                .build());
+        if (CollectionUtils.isNotEmpty(names)) {
+            return false;
+        }
+
+
         POUtils.initCreatPO(categoryInfo);
         String gkcode = GK_CATEGORY + CommonUtil.getIdByUUId();
         categoryInfo.setGkcode(gkcode);
-        categoryInfo.setGkcodeTreePath(categoryInfoDTO.getGkcodeTreePath() + STRING_COMMA + gkcode);
+        if ("-1".equals(categoryInfoDTO.getGkcodeTreePath()) || StringUtils.isEmpty(categoryInfoDTO.getGkcodeTreePath())) {
+            categoryInfo.setGkcodeTreePath(gkcode);
+        } else {
+            categoryInfo.setGkcodeTreePath(categoryInfoDTO.getGkcodeTreePath() + STRING_COMMA + gkcode);
+        }
         if (null == categoryInfo.getSortIndex()) {
             List<CategoryInfo> categoryInfos = categoryInfoMapper.selectByExample(Example.builder(CategoryInfo.class)
                     .where(WeekendSqls.<CategoryInfo>custom()
