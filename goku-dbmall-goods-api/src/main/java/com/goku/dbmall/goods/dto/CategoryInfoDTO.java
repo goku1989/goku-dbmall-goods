@@ -18,7 +18,7 @@ public class CategoryInfoDTO {
 
     private String parentGkcode;
 
-    private String logo;
+    private String gkcodeTreePath;
 
     private String slogan;
 

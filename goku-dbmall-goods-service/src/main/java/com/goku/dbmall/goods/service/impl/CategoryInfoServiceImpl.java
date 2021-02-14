@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 import static com.goku.dbmall.goods.common.constant.CustomConstants.*;
 import static com.goku.foundation.constant.NumberConstant.*;
+import static com.goku.foundation.constant.SymbolConstant.STRING_COMMA;
 
 @Slf4j
 @Service
@@ -43,7 +44,9 @@ public class CategoryInfoServiceImpl implements CategoryInfoService {
         CategoryInfo categoryInfo = CommonUtil.convert(categoryInfoDTO, CategoryInfo.class);
         categoryInfo.setName(categoryInfo.getName().trim());
         POUtils.initCreatPO(categoryInfo);
-        categoryInfo.setGkcode(GK_CATEGORY + CommonUtil.getIdByUUId());
+        String gkcode = GK_CATEGORY + CommonUtil.getIdByUUId();
+        categoryInfo.setGkcode(gkcode);
+        categoryInfo.setGkcodeTreePath(categoryInfoDTO.getGkcodeTreePath() + STRING_COMMA + gkcode);
         if (null == categoryInfo.getSortIndex()) {
             List<CategoryInfo> categoryInfos = categoryInfoMapper.selectByExample(Example.builder(CategoryInfo.class)
                     .where(WeekendSqls.<CategoryInfo>custom()

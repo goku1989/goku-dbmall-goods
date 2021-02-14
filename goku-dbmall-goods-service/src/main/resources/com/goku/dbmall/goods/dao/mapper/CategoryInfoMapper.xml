@@ -8,7 +8,7 @@
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="parent_gkcode" jdbcType="VARCHAR" property="parentGkcode" />
-    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="gkcode_tree_path" jdbcType="VARCHAR" property="gkcodeTreePath" />
     <result column="slogan" jdbcType="VARCHAR" property="slogan" />
     <result column="cat_image" jdbcType="VARCHAR" property="catImage" />
     <result column="bg_color" jdbcType="VARCHAR" property="bgColor" />
@@ -21,7 +21,7 @@
     <result column="ts" jdbcType="BIGINT" property="ts" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, gkcode, name, code, type, parent_gkcode, logo, slogan, cat_image, bg_color, sort_index,
+    id, gkcode, name, code, type, parent_gkcode, gkcode_tree_path, slogan, cat_image, bg_color, sort_index,
     deleted, created_date, created_user, modified_date, modified_user, ts
   </sql>
 </mapper>

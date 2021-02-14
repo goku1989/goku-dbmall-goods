@@ -19,7 +19,7 @@ public class CategoryInfo extends BasePO {
 
     private String parentGkcode;
 
-    private String logo;
+    private String gkcodeTreePath;
 
     private String slogan;
 
