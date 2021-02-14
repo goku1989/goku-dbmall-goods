@@ -42,6 +42,9 @@ public class CategoryInfoServiceImpl implements CategoryInfoService {
 
     @Override
     public Boolean insertCategory(CategoryInfoDTO categoryInfoDTO) {
+        if (StringUtils.isEmpty(categoryInfoDTO.getName()) || StringUtils.isEmpty(categoryInfoDTO.getGkcodeTreePath())) {
+            return false;
+        }
         CategoryInfo categoryInfo = CommonUtil.convert(categoryInfoDTO, CategoryInfo.class);
         String name = categoryInfo.getName().trim();
         categoryInfo.setName(name);
